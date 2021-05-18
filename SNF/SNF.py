@@ -1,3 +1,5 @@
+# 实现 SNF 算法
+
 import numpy as np
 import copy
 from scipy.stats import norm
@@ -5,6 +7,8 @@ from scipy.stats import norm
 def dist2(X, C):
     '''
     求 X 的每个行向量和 C 的每个行向量欧氏距离的平方
+    代码里有个两重循环很费时间，但处理几百个数据还是可以的，
+    啥时候 hold 不住了再改罢
     '''
     nrows = X.shape[0]
     ncols = C.shape[0]
