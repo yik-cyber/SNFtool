@@ -1,6 +1,6 @@
 # 基于similarity的silhouette计算，可能有bug
 
-import numpy as np 
+import numpy as np
 
 def silhouette_samples(similarity, labels):
     '''
@@ -8,13 +8,19 @@ def silhouette_samples(similarity, labels):
     '''
     n_samples = similarity.shape[0]
     clusters = np.unique(labels)
-    n_clusters = len(clusters)
-    intra_cluster = np.array([np.mean(similarity[i, labels == labels[i]]) for i in range(n_samples)])
-    inter_cluster = np.array([np.max([np.mean(similarity[i, labels == j]) 
+
+    intra_cluster = np.zeros(n_samples)
+    for i in range(n_samples):
+        mask = labels == labels[i]
+        mask[i] = False
+        if np.count_nonzero(mask) > 0:
+            intra_cluster[i] = np.mean(similarity[i, mask])
+
+    inter_cluster = np.array([np.max([np.mean(similarity[i, (labels == j)]) 
                                     for j in clusters if j != labels[i]])
                                     for i in range(n_samples)])
-
-    sil_samples = (intra_cluster - inter_cluster) / np.max((intra_cluster, inter_cluster), axis = 0)
+    
+    sil_samples = (intra_cluster - inter_cluster) / np.maximum(intra_cluster, inter_cluster)
     return sil_samples
 
 

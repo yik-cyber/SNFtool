@@ -24,4 +24,7 @@ y_sklearn = SpectralClustering(n_clusters=3, affinity='precomputed').fit_predict
 from sklearn.metrics import silhouette_score
 cat_feature = np.concatenate(features, axis = 1) # 样本间距离设为三个特征连接起来的欧氏距离，原文的设定可能不同
 score = silhouette_score(cat_feature, y_sklearn)
-print("silhouette score:", score) # 0.093
+print("silhouette score using Eucilid dist:", score) # 0.093
+
+from SNF import silhouette
+print("my silhouette score:", silhouette.silhouette_score(fusion, y_sklearn))
