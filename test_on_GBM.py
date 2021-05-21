@@ -17,14 +17,16 @@ affinities = [SNF.affinityMatrix(dist) for dist in dists]
 fusion = SNF.SNF(affinities)
 
 # 谱聚类
-from sklearn.cluster import SpectralClustering
-y_sklearn = SpectralClustering(n_clusters=3, affinity='precomputed').fit_predict(fusion)
+import sklearn.cluster
+y_sklearn = sklearn.cluster.SpectralClustering(n_clusters=3, affinity='precomputed').fit_predict(fusion)
+
+from spectral_clustering import spectralClustering
+y_my_spectral_cluster = spectralClustering.spectral_cluster(fusion, 3)
+y_my_SpectralClustering = spectralClustering.SpectualClustering(fusion, 3)
+
 
 # 计算 silhouette score
-from sklearn.metrics import silhouette_score
-cat_feature = np.concatenate(features, axis = 1) # 样本间距离设为三个特征连接起来的欧氏距离，原文的设定可能不同
-score = silhouette_score(cat_feature, y_sklearn)
-print("silhouette score using Eucilid dist:", score) # 0.093
-
 from SNF import silhouette
-print("my silhouette score:", silhouette.silhouette_score(fusion, y_sklearn))
+print("sklearn:", silhouette.silhouette_score(fusion, y_sklearn))
+print("my spectral_cluster:", silhouette.silhouette_score(fusion, y_my_spectral_cluster))
+print("my SpectralClustering:", silhouette.silhouette_score(fusion, y_my_SpectralClustering))
