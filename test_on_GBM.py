@@ -43,3 +43,18 @@ df = pd.DataFrame({
 results = multivariate_logrank_test(df['Survival'], df['Death'], df['Label'], weightings='peto')
 print('\n*** p value ***')
 print(results.p_value) # p < 0.05
+
+# 绘制生存曲线
+import matplotlib.pyplot as plt 
+from lifelines import KaplanMeierFitter
+kmf = KaplanMeierFitter()
+
+ax = plt.subplot(111)
+cluster_num = 3
+for i in range(cluster_num):
+    idx = (df['Label'] == i)
+    kmf.fit(df['Survival'][idx], df['Death'][idx], label='group' + str(i))
+    kmf.plot_survival_function(ax=ax, ci_show=False)
+
+plt.title('Lifespans for different groups')
+plt.show()
