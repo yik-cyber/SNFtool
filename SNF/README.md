@@ -13,3 +13,18 @@ affinity2 = SNF.affinityMatrix(dist2)
 # 把不同特征的相似矩阵融合成一个相似矩阵
 fusion = SNF.SNF([affinity1, affinity2])
 ```
+
+#### Reference
+
+Similarity Network Fusion:
+
+[Similarity network fusion for aggregating data types on a genomic scale](https://www.nature.com/articles/nmeth.2810)
+
+Silhouette Score:
+
+[Silhouettes: a graphical aid to the interpretation and validation of cluster analysis](https://www.sciencedirect.com/science/article/pii/0377042787901257)
+
+生存分析：
+
+[LIFELINES: Introduction to survival analysis](https://lifelines.readthedocs.io/en/latest/Survival%20Analysis%20intro.html#introduction-to-survival-analysis)
+

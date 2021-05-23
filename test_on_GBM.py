@@ -27,6 +27,19 @@ y_my_SpectralClustering = spectralClustering.SpectualClustering(fusion, 3)
 
 # 计算 silhouette score
 from SNF import silhouette
+print('*** silhouette score ***')
 print("sklearn:", silhouette.silhouette_score(fusion, y_sklearn))
 print("my spectral_cluster:", silhouette.silhouette_score(fusion, y_my_spectral_cluster))
 print("my SpectralClustering:", silhouette.silhouette_score(fusion, y_my_SpectralClustering))
+
+# 生存分析，计算3类survival曲线的p值
+surv_df = pd.read_table(GBM_path + 'GLIO_Survival.txt', delim_whitespace=True)
+from lifelines.statistics import multivariate_logrank_test
+df = pd.DataFrame({
+    'Survival': surv_df['Survival'],
+    'Death': surv_df['Death'],
+    'Label': y_my_SpectralClustering
+})
+results = multivariate_logrank_test(df['Survival'], df['Death'], df['Label'], weightings='peto')
+print('\n*** p value ***')
+print(results.p_value) # p < 0.05
