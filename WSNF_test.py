@@ -1,7 +1,7 @@
 from numpy.core.numeric import allclose
 import pandas as pd
 import numpy as np
-from WSNF import *
+from WSNF.WSNF import *
 
 gen_exp = np.load('WSNF\data\gen_exp.npy', allow_pickle = True).astype('float64')
 gen_ranking = np.load('WSNF\data\gen_ranking.npy', allow_pickle = True).astype('float64')
