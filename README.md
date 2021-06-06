@@ -1,4 +1,9 @@
 # SNFtool
+___
+## Reference
+- [Network fusion](https://nbisweden.github.io/workshop_omics_integration/session_nmf/SNF_main.html)
+- All papers and implementations are in the links above. :)  
+
 ## 翻译代码分工
 
 - A. 预处理+SNF
