@@ -1,4 +1,3 @@
-from SNF.SNF import affinityMatrix
 import pyreadr
 from SNF import *
 from spectralClustering import *
