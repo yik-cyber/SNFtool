@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def kNN_graph(graph, K):
     '''returns kNN graph of the input graph, for each node only the
     largest k edges are preserved.
@@ -89,3 +90,32 @@ def affinity_graph_fusion(graphs, K=20, r = 2, weight = None):
     
     return W
 
+
+import sys
+sys.path.append('..')
+from SNF.SNF import affinityMatrix
+from WSNF.WSNF import EuclideanDistance
+
+def ANF_TEST(datasets, K=20, alpha=0.5):
+    '''
+    用于测试的ANF
+    '''
+    W_temp = []
+    for data in datasets:
+        distance = EuclideanDistance(data.T)
+        afft_mat = affinityMatrix(distance, K, alpha)
+        W_temp.append(afft_mat)
+
+    W = affinity_graph_fusion(W_temp, K=K, r=2)
+    return W
+
+def SINGLE_VIEW_MAT(datasets, K, alpha):
+    '''
+    用于测试单个相似矩阵
+    '''
+    W_temp = []
+    for data in datasets:
+        distance = EuclideanDistance(data.T)
+        afft_mat = affinityMatrix(distance, K, alpha)
+        W_temp.append(afft_mat)
+    return W_temp
