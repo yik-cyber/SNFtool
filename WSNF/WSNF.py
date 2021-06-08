@@ -1,4 +1,4 @@
-from SNF import *
+from .SNF import *
 import pandas as pd
 import numpy as np
 
