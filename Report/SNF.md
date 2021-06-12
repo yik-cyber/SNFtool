@@ -66,3 +66,58 @@
   0, \small{otherwise}
   \end{cases}
   $$
+- iteratively **update** similarity matrix corresponding to each of the data types
+  $$
+  \begin{aligned}
+  \textbf{P}^{(v)} = \textbf{S}^{(v)} \times \Big(\frac{\sum_{k\not ={v}}\textbf{P}^{k}}{m-1}\Big) \times (\textbf{S}^{(v)})^{T} 
+  \end{aligned}
+  $$
+- example: two data types
+  $$
+  \textbf{P}^{(1)}_{t+1} = \sum_{k\in N_i} \sum_{l \in N_j} \textbf{S}^{(l)}(i,k) \times \textbf{S}^{(l)}(j,l) \times \textbf{P}^{(2)}_{t}(k,l)
+  $$
+  - similarity information is only propagated through the common neighborhood
+  - comlementary information from other data type
+
+## WSNF
+#### Background
+- Existing methods rarely use information from gene regulatory networks to facilitate the subtype identification. In other words, the information among features is ignored.
+#### Main steps
+- Constructe the regulatory netword
+  ![regulatory network](2.png)
+- Calculate feature weights
+- Weighted similarity network fusion
+#### Advantage
+- Make use of both the expression data and network information. Take the feature weight into consideration, so perform better than SNF.
+#### Details
+- Compute ranking of features using Google PageRank
+  Network is defined as $G(V, E)$. The nodes $V$ are the features, and the edges $E$ are the interactions. The direciton of an edge is from a regulator to its target.
+  $$
+  \begin{aligned}
+  N features &= \{f_1, f_2, ..., f_N\} \\
+  R(f_i) &= \frac{1-d}{N} + d \sum_{f_j \in T(f_i)} \frac{R(f_j)}{L(f_i)}
+  \end{aligned}
+  $$
+  Normalize the ranks as:
+  $$
+  R_N(f_i) = \frac{R(f_i)}{\sum_{m=1}^{N}R(f_m)}
+  $$
+- Integrate feature ranking and feature variantion
+  - $X(f_i)$ is a numeric vector representing the expression value of feature $f_i$ across all samples
+  The MAD(median absolute deviation) of a feature $f_i$ is calculated as:
+  $$
+  MAD(f_i) = median(|X(f_i) - median(X(f_i))|)
+  $$  
+  Normalize the MADs as:
+  $$
+  MAD_N(f_i) = \frac{MAD(f_i)}{\sum_{m=1}^{N}MAD(f_m)}
+  $$
+  - Apply a linear model to integrate these two measures to get the final weight
+    $$
+    W(f_i) = \beta R_N(f_i) + (1-\beta)MAD_N(f_i)
+    $$
+- Weighted similarity network fusion
+  $$
+  Distance(S_i, S_j) = \sqrt{\sum_{m=1}^{P}W(f_m) * (f_m^{S_i}-f_m^{S_j})^2} \space \forall i,j \le n, i\not = j
+  $$
+- Execute SNF algorithm
