@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd 
 from SNF import SNF
-from spectral_clustering import spectralClustering, CalNMI
+from SpectralClustering import spectralClustering, CalNMI
 
 # 载入基因、甲基化、miRNA三项数据
 GBM_path = './dataset/GBM/'
@@ -20,7 +20,7 @@ fusion = SNF.SNF(affinities)
 import sklearn.cluster
 y_sklearn = sklearn.cluster.SpectralClustering(n_clusters=3, affinity='precomputed').fit_predict(fusion)
 
-from spectral_clustering import spectralClustering
+from SpectralClustering import spectralClustering
 y_my_spectral_cluster = spectralClustering.spectral_cluster(fusion, 3)
 y_my_SpectralClustering = spectralClustering.SpectualClustering(fusion, 3)
 
