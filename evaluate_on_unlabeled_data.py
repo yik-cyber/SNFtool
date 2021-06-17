@@ -45,13 +45,13 @@ for name, graph in zip(names, graphs):
     #print(df.info())
 
 
-import SNF.snfpy_sil
+#import SNF.snfpy_sil
 fig, axs = plt.subplots(2,3)
 i = 0
 for name, graph, y_pred in zip(names, graphs, y_pred_list):
     print('\n*** {} ***'.format(name))
     print('Silhouette: {}'.format(silhouette_score(graph, y_pred)))
-    print(SNF.snfpy_sil.silhouette_score(graph, y_pred))
+    #print(SNF.snfpy_sil.silhouette_score(graph, y_pred))
     silhouette_plot(graph, y_pred, axs[i//3][i%3], title=name)
     i += 1
 
