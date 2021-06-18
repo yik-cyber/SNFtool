@@ -235,3 +235,10 @@ You can reproduce our results by running ``evaluate_on_labeled_data.py``, ``eval
 SNF：向红静、马圣杰
 WSNF：向红静
 ANF：马圣杰
+
+## References
+
+- Wang B, Mezlini A M, Demir F, et al. Similarity network fusion for aggregating data types on a genomic scale
+- Xu T, Le TD, Liu L, Wang R, Sun B, et al. (2016) Identifying Cancer Subtypes from miRNA-TF-mRNA Regulatory Networks and Expression Data.
+- Ma T, Zhang A. Affinity network fusion and semi-supervised learning for cancer patient clustering
+- Silhouettes: a graphical aid to the interpretation and validation of cluster analysis
