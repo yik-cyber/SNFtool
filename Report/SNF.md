@@ -219,8 +219,7 @@
   ![ARI](figures/ARI.png)
   Graph fusion methods (SNF and ANF) get better results than single view based clustering. The performance of SNF and ANF are quite similar.
   WSNF is not included because these datasets lack interaction data between features, which are nessesary for WSNF.
-- Unlabeled datasets:
-  GBM dataset, from ...
+- Unlabeled datasets: GBM dataset
   - Survival analysis
     ![survival analysis](figures/logrank_test.png "Survival analysis")
     Both WSNF and ANF find out a subtype of a relatively high survival rate. They also get very small p-values. SNF failed to do the job.
